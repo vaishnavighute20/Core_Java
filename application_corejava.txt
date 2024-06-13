@@ -1,0 +1,227 @@
+//equals method
+if(obj instanceof Cricketer)
+		{
+			Cricketer c=(Cricketer)obj;
+			return this.emailid.equals(emailid);
+		}
+		return false;
+
+
+
+//
+
+public static Amazon checkAllinputs(String name, String emailid, String password, String subcription, double amount,
+			String creationdate, List<Amazon> alist)throws AmazonException
+	//  change email and enum type to string
+	{
+		validateEmail(emailid, alist);
+
+		// parsing to string
+		LocalDate date= LocalDate.parse(creationdate);
+		Subcription sub= Subcription.valueOf(subcription.toUpperCase());
+		// while returning of date and enun take new reference
+		return new Amazon(name, emailid, password, sub, amount, date);
+		
+	}
+
+
+//validatins +method
+
+// email validations in all input in add method
+	public static String validateEmail(String emailid,String phoneNo,List<Cricketer> clist) throws cricketerException{
+	      for (Cricketer c:clist)
+		if(c.getEmailid().equals(emailid))
+		{
+			if(c.getPhoneno().equals(phoneNo))
+			{
+				throw new cricketerException("Duplicate emailid and phoneNo");
+
+			}
+			
+		}
+		
+		return emailid;
+		
+	}
+
+public class CricketerUtils {
+	public static Cricketer allValidations(String name, int age, String emailid, String phoneno, int         rating,List<Cricketer>clist )throws cricketerException
+	{
+		String Email_id=validateEmail(emailid,phoneno,clist);
+		int Age=validateAge(age);
+		int rate=validateRating(rating);
+		
+		return new Cricketer(name,age,emailid,phoneno,rating);
+		
+	}
+
+	
+	public static String modifyRating(String emailid, int  rating, List<Cricketer> clist) throws cricketerException 
+	{
+		for (Cricketer c:clist)
+		{
+			if(c.getEmailid().equals(emailid))
+			{
+				int validateRating = validateRating(rating);
+				c.setRating(validateRating);
+				
+			}
+		}
+		return "Rating is updated";
+		
+	}
+	
+
+	public static void searchByName(String name, List<Cricketer> clist) 
+	{
+		for (Cricketer c:clist) {
+			if(c.getName().equals(name))
+			{
+				System.out.println(c);
+			}
+		}
+ 		
+	}
+
+	public static void deleteByName(String name, List<Cricketer> clist) 
+	{
+ 		
+		for(Cricketer c: clist)
+		{
+				Iterator<Cricketer> i =clist.iterator();
+				
+				while(i.hasNext())
+				{
+					Cricketer c1=i.next();
+					if(c1.getName().equalsIgnoreCase(name))
+					{
+					
+					i.remove();
+					System.out.println("deleted");
+					}
+					
+				}
+			
+		}
+	}
+
+
+}
+
+
+
+
+
+
+// tester
+try(Scanner sc=new Scanner(System.in)){
+			boolean exit=false;
+			while(!exit) {
+				System.out.println(" Options:"
+						+ "1.   "
+						+ "2.    "
+						+ "3.    ");
+				
+				System.out.println("choose options");
+				try {
+					
+					switch (sc.nextInt()) {
+					case 1:
+					//List<Cricketer>clist=new ArrayList<Cricketer>();// main method 	
+						System.out.println(" ");
+						break;
+					
+						
+                    case 2:
+						
+						System.out.println(" ");
+						break;
+							
+                    case 3:	
+                    	
+                    	System.out.println(" ");
+						break;
+						
+						
+                    case 4:
+                    	
+                    	System.out.println(" ");
+						break;
+						
+                    case 5:
+                    	
+                    	System.out.println(" ");
+						break;
+						
+						
+						
+                    case 6:
+                    	
+                    	System.out.println(" ");
+						break;
+
+					default:
+						break;
+					}
+					
+				}catch(Exception e) {
+					
+					System.out.println(e);
+					
+				}
+				
+			}
+		}
+
+
+
+	// display data
+                    	for(Cricketer c:clist)
+                    	{
+    			System.out.println(c);
+                    	}
+		      break;
+
+
+  case 3:	//update  rating 
+                    	
+                    	    System.out.println("enter email and rating ");
+                  //  	    System.out.println(modifyRating(sc.next(), sc.nextInt(), clist));
+                    	    String msg=modifyRating(sc.next(), sc.nextInt(), clist);
+                    	    System.out.println(msg);
+                    	     
+ 						break;
+						
+		     case 4:// search by name
+                    	
+                    	searchByName(sc.next(),clist);
+                    	
+						break;
+						
+                    case 5:// delete by emailid
+                    	deleteByName(sc.next(),clist);
+                    
+						break;
+						
+						
+						
+                    case 6:// sort by rating
+                    	Collections.sort(clist, new sortByRating());
+                    	   for (Cricketer c:clist)
+                    	   {
+                    		   System.out.println("name:"+c.getName()+"rating "+c.getRating());
+                    	   }
+                    	System.out.println(" ");
+						break
+  //  method of sorting
+public class sortByRating implements Comparator <Cricketer> {
+
+	@Override
+	public int compare(Cricketer c1, Cricketer c2) {
+ 		return Integer.compare(c1.getRating(), c2.getRating());
+	}
+
+}
+
+
+
